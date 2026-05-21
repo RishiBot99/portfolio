@@ -7,12 +7,12 @@ import { ResearchSection } from "./components/ResearchSection";
 import { InterestsSection } from "./components/InterestsSection";
 import { ContactSection } from "./components/ContactSection";
 import { Footer } from "./components/Footer";
-import { LegoAnimation } from "./components/LegoAnimation";
+import { BackgroundAnimation } from "./components/BackgroundAnimation";
 
 export default function App() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <LegoAnimation />
+      <BackgroundAnimation />
       <Navigation />
       <Header
         name="Your Name"
