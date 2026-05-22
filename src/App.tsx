@@ -1,3 +1,4 @@
+// Remove "/app" from all of these paths
 import { Navigation } from "./components/Navigation";
 import { Header } from "./components/Header";
 import { AboutSection } from "./components/AboutSection";
@@ -15,8 +16,8 @@ export default function App() {
       <BackgroundAnimation />
       <Navigation />
       <Header
-        name="Your Name"
-        title="Electrical Engineering @ University Name"
+        name="Rishabh Anand"
+        title="Electrical Engineering @ University of Kansas"
         bio="Passionate about power systems, embedded development, and renewable energy. Building innovative solutions that make a difference in the world through sustainable technology and creative circuit design."
       />
       <AboutSection />

@@ -1,0 +1,22 @@
+/* Custom Tailwind Font Utilities */
+@layer utilities {
+  .font-orbitron {
+    font-family: 'Orbitron', monospace;
+  }
+
+  .font-vt323 {
+    font-family: 'VT323', monospace;
+  }
+
+  .font-fixedsys {
+    font-family: 'VT323', monospace;
+  }
+
+  .font-lcd {
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  .font-bodega {
+    font-family: 'Rajdhani', 'Encode Sans', sans-serif;
+  }
+}

@@ -8,7 +8,7 @@ interface HeaderProps {
   bio: string;
 }
 
-export function Header({ name, title, bio }: HeaderProps) {
+export function Header({ name = "", title = "", bio = "" }: HeaderProps) {
   const [displayedName, setDisplayedName] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
 
