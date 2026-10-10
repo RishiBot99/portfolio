@@ -26,26 +26,26 @@ export function ContactSection() {
               {
                 icon: Mail,
                 label: "Email",
-                value: "your.email@university.edu",
-                href: "mailto:your.email@university.edu",
+                value: "ranand@ku.edu",
+                href: "mailto:ranand@ku.edu",
               },
               {
                 icon: Linkedin,
                 label: "LinkedIn",
-                value: "/in/yourname",
-                href: "https://linkedin.com/in/yourname",
+                value: "/in/rishabh-anand99",
+                href: "https://www.linkedin.com/in/rishabh-anand99/",
               },
               {
                 icon: Github,
                 label: "GitHub",
-                value: "@yourname",
-                href: "https://github.com/yourname",
+                value: "@RishiBot99",
+                href: "https://github.com/RishiBot99",
               },
               {
                 icon: MapPin,
                 label: "Location",
-                value: "University City, State",
-                href: "#",
+                value: "Univeristy of Kansas, Lawrence, KS",
+                href: "https://engr.ku.edu/",
               },
             ].map((contact, index) => (
               <motion.a

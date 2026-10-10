@@ -7,36 +7,28 @@ export function LeadershipSection() {
 
   const experiences = [
     {
-      icon: Users,
-      role: "President",
-      organization: "IEEE Student Branch",
-      period: "2024 - Present",
+      icon: BookOpen,
+      role: "Treasurer",
+      organization: "Society of Asian Students and Engineers (SASE) Student Branch",
+      period: "May 2025 - Present",
       description:
-        "Leading 150+ members in organizing technical workshops, hackathons, and community outreach programs",
-    },
-    {
-      icon: Award,
-      role: "Team Captain",
-      organization: "Robotics Competition Team",
-      period: "2023 - 2024",
-      description:
-        "Managed cross-functional team of 12 students, secured 2nd place in regional competition",
+        "Manage fundraising, project costs, events, travel, and raised $14000+ for the 2025-2026 budget, Organized mulitple trips for SASE National Conference and increased fundraising through % nights, food stalls, event tabling, and school funding",
     },
     {
       icon: Presentation,
-      role: "Teaching Assistant",
-      organization: "Circuit Analysis Lab",
-      period: "2023 - Present",
+      role: "Public Relations Chair",
+      organization: "Institute of Electrical and Electronics Engineers (IEEE) Student Branch",
+      period: "May 2026 - Present",
       description:
-        "Mentoring 40+ students per semester in circuit theory and lab techniques, holding weekly office hours",
+        "Organize outreach events at KU reaching over 1000 people across the university recruiting 40+ students, Reach out to company representatives to raise over $1000 for the KU Branch, improving events and projects, Manage Social Media and connections towards companies and communicate with hundreds of students",
     },
     {
-      icon: BookOpen,
-      role: "Workshop Coordinator",
-      organization: "Engineering Outreach Program",
-      period: "2022 - Present",
+      icon: Users,
+      role: "Logistics",
+      organization: "Association of Computing Machinery (ACM) Student Branch",
+      period: "May 2026 - Present",
       description:
-        "Designed and delivered STEM workshops to 500+ K-12 students, inspiring next generation of engineers",
+        "Budgeted and organized trips to hackathons and conferences for groups of over 10 students, and working on providing company tours",
     },
   ];
 

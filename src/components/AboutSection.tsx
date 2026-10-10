@@ -9,22 +9,22 @@ export function AboutSection() {
     {
       icon: Cpu,
       title: "Circuit Design",
-      description: "Analog and digital circuit design with hands-on PCB experience",
+      description: "Analog and digital circuit design with hands-on PCB Design for electronic projects",
     },
     {
       icon: Code,
       title: "Embedded Systems",
-      description: "C/C++ programming for microcontrollers and FPGA development",
+      description: "C/C++ programming for R-Pi5 and ESP-32 microcontrollers and IoT sensors",
     },
     {
       icon: Lightbulb,
-      title: "Problem Solving",
-      description: "Analytical approach to complex engineering challenges",
+      title: "Research",
+      description: "Analytical approach to complex engineering challenges in Space and Electronics",
     },
     {
       icon: Target,
       title: "Project Management",
-      description: "Leading technical teams and delivering results on time",
+      description: "Leading technical teams and delivering products or services using electronics",
     },
   ];
 
@@ -42,26 +42,36 @@ export function AboutSection() {
             <div>
               <p className="text-lg text-stone-800 mb-4 font-bodega">
                 I'm a passionate electrical engineering student with a focus on
-                power systems, embedded development, and innovative circuit
+                power systems, embedded development, and circuit
                 design. My journey in engineering has been driven by curiosity
-                and a desire to solve real-world problems through technology.
+                and a desire to help people around me through solving real-world problems through technology.
               </p>
               <p className="text-lg text-stone-800 font-bodega">
                 When I'm not designing circuits or coding microcontrollers, you
                 can find me leading student organizations, conducting research,
-                or mentoring fellow students in their engineering journey.
+                or helping fellow students and friends in their journey.
               </p>
             </div>
             <div className="flex items-center justify-center">
-              <div className="w-64 h-64 bg-gradient-to-br from-amber-600 via-orange-500 to-cyan-400 rounded-lg shadow-2xl flex items-center justify-center border-4 border-amber-900">
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                >
-                  <Cpu className="w-32 h-32 text-white" />
-                </motion.div>
-              </div>
-            </div>
+  <motion.div 
+    initial={{ opacity: 0, scale: 0.9 }}
+    animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+    transition={{ duration: 0.8 }}
+    className="relative group"
+  >
+    {/* Decorative Background Element */}
+    <div className="absolute -inset-2 bg-gradient-to-r from-cyan-500 to-amber-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+    
+    {/* The Actual Image Container */}
+    <div className="relative w-64 h-80 bg-amber-100 rounded-lg shadow-2xl overflow-hidden border-4 border-amber-900">
+      <img 
+        src="/images/profilepic_official.jpg" // Change this to your filename
+        alt="Your Name"
+        className="w-full h-full object-cover  transition-all duration-500"
+      />
+    </div>
+  </motion.div>
+</div>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">

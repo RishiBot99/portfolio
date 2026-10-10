@@ -1,40 +1,11 @@
 import { motion } from "motion/react";
-import { useInView } from "./useInView";
-import { ExternalLink, Github } from "lucide-react";
+import { useInView } from "./useInView"; // Ensure this path matches your folder
+import { ExternalLink, Github, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { projects } from "../data/projects"; // Import the data we just created
 
 export function ProjectsSection() {
   const [ref, isInView] = useInView();
-
-  const projects = [
-    {
-      title: "Smart Home Energy Monitor",
-      description:
-        "IoT device using ESP32 to monitor and optimize household energy consumption with real-time data visualization",
-      tags: ["IoT", "ESP32", "Python", "MQTT"],
-      image: "bg-gradient-to-br from-cyan-500 to-teal-600",
-    },
-    {
-      title: "Autonomous Line Following Robot",
-      description:
-        "Arduino-based robot with PID control for precise line tracking and obstacle avoidance capabilities",
-      tags: ["Arduino", "C++", "Control Systems"],
-      image: "bg-gradient-to-br from-amber-600 to-orange-600",
-    },
-    {
-      title: "Solar MPPT Charge Controller",
-      description:
-        "Maximum Power Point Tracking controller for solar panels with 95% efficiency and LCD display",
-      tags: ["Power Electronics", "Embedded C", "PCB Design"],
-      image: "bg-gradient-to-br from-yellow-500 to-orange-500",
-    },
-    {
-      title: "FPGA Digital Synthesizer",
-      description:
-        "Verilog-based audio synthesizer on FPGA with multiple waveforms and MIDI input support",
-      tags: ["FPGA", "Verilog", "Digital Design"],
-      image: "bg-gradient-to-br from-red-500 to-orange-600",
-    },
-  ];
 
   return (
     <section id="projects" className="py-20 bg-stone-100">
@@ -49,49 +20,50 @@ export function ProjectsSection() {
           <div className="grid md:grid-cols-2 gap-8">
             {projects.map((project, index) => (
               <motion.div
-                key={project.title}
+                key={project.id}
                 initial={{ opacity: 0, scale: 0.9 }}
-                animate={
-                  isInView
-                    ? { opacity: 1, scale: 1 }
-                    : { opacity: 0, scale: 0.9 }
-                }
+                animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="bg-amber-50 border-2 border-amber-800 rounded-lg shadow-lg overflow-hidden hover:shadow-2xl hover:border-cyan-500 transition-all"
+                className="group bg-amber-50 border-2 border-amber-800 rounded-lg shadow-lg overflow-hidden hover:shadow-2xl hover:border-cyan-500 transition-all flex flex-col"
               >
-                <div className={`h-48 ${project.image} flex items-center justify-center border-b-2 border-amber-800`}>
-                  <div className="text-white text-6xl opacity-70">⚡</div>
-                </div>
-                <div className="p-6">
-                  <h3 className="mb-3 text-amber-900 font-lcd">{project.title}</h3>
-                  <p className="text-stone-700 mb-4 font-bodega">
+                {/* Clickable Image Area */}
+                <Link to={`/project/${project.id}`} className="h-48 relative overflow-hidden block">
+                  <div className={`w-full h-full ${project.image} flex items-center justify-center border-b-2 border-amber-800 transition-transform duration-500 group-hover:scale-110`}>
+                    <div className="text-white text-6xl opacity-70">⚡</div>
+                  </div>
+                  {/* Hover Overlay */}
+                  <div className="absolute inset-0 bg-cyan-900/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <span className="bg-amber-100 text-amber-900 px-4 py-2 rounded-lg font-lcd flex items-center gap-2">
+                      View Details <ArrowRight className="w-4 h-4" />
+                    </span>
+                  </div>
+                </Link>
+
+                <div className="p-6 flex-1 flex flex-col">
+                  <h3 className="mb-3 text-amber-900 font-lcd text-xl">{project.title}</h3>
+                  <p className="text-stone-700 mb-4 font-bodega flex-1">
                     {project.description}
                   </p>
-                  <div className="flex flex-wrap gap-2 mb-4">
+                  
+                  <div className="flex flex-wrap gap-2 mb-6">
                     {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 bg-cyan-100 border border-cyan-600 text-cyan-900 rounded text-sm font-fixedsys"
-                      >
+                      <span key={tag} className="px-3 py-1 bg-cyan-100 border border-cyan-600 text-cyan-900 rounded text-xs font-fixedsys">
                         {tag}
                       </span>
                     ))}
                   </div>
-                  <div className="flex gap-4">
-                    <a
-                      href="#"
-                      className="flex items-center gap-2 text-cyan-700 hover:text-cyan-900 hover:underline font-fixedsys"
-                    >
-                      <Github className="w-4 h-4" />
-                      Code
-                    </a>
-                    <a
-                      href="#"
-                      className="flex items-center gap-2 text-cyan-700 hover:text-cyan-900 hover:underline font-fixedsys"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      Demo
-                    </a>
+
+                  <div className="flex justify-between items-center mt-auto pt-4 border-t border-amber-200">
+                    <div className="flex gap-4">
+                      {project.github && (
+                        <a href={project.github} className="text-cyan-700 hover:text-cyan-900 flex items-center gap-1 font-fixedsys text-sm">
+                          <Github className="w-4 h-4" /> Code
+                        </a>
+                      )}
+                    </div>
+                    <Link to={`/project/${project.id}`} className="text-amber-900 font-lcd text-sm hover:underline flex items-center gap-1">
+                      Case Study <ArrowRight className="w-4 h-4" />
+                    </Link>
                   </div>
                 </div>
               </motion.div>

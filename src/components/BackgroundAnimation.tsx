@@ -1,89 +1,69 @@
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
-interface FloatingBlock {
+interface Particle {
   id: number;
-  x: number;
-  y: number;
-  size: number;
-  color: string;
-  duration: number;
-  delay: number;
+  y: number;          // Vertical position (0-100vh)
+  size: number;       // Size in pixels
+  color: string;      // Color from the EE theme
+  duration: number;   // Speed of travel
+  delay: number;      // Staggered start time
 }
 
 export function BackgroundAnimation() {
-  const [blocks, setBlocks] = useState<FloatingBlock[]>([]);
+  const [particles, setParticles] = useState<Particle[]>([]);
 
   useEffect(() => {
-    const colors = ["#8B4513", "#A0522D", "#D2691E", "#FF8C00", "#FFA500", "#FFD700", "#DC143C", "#FF6347", "#40E0D0", "#00CED1", "#48D1CC"];
-    const newBlocks: FloatingBlock[] = Array.from({ length: 20 }, (_, i) => ({
+    // Electrical Engineering themed colors (Copper, Gold, Cyan, Slate)
+    const colors = ["#B87333", "#DAA520", "#00ced1", "#94a3b8", "#fbbf24"];
+    
+    const newParticles: Particle[] = Array.from({ length: 10 }, (_, i) => ({
       id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 40 + 20,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      duration: Math.random() * 10 + 15,
-      delay: Math.random() * 5,
+      y: Math.random() * 100,             // Random height
+      size: Math.random() * 6 + 4,        // Small (4px to 10px)
+      color: colors[i % colors.length],
+      duration: Math.random() * 10 + 15,  // Slow (15s to 25s across screen)
+      delay: Math.random() * 20,          // Staggered start
     }));
-    setBlocks(newBlocks);
+    setParticles(newParticles);
   }, []);
 
   return (
-    <>
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        {blocks.map((block) => (
-          <motion.div
-            key={block.id}
-            initial={{ x: `${block.x}vw`, y: `${block.y}vh`, opacity: 0.3 }}
-            animate={{
-              x: [`${block.x}vw`, `${(block.x + 30) % 100}vw`, `${(block.x - 20) % 100}vw`, `${block.x}vw`],
-              y: [`${block.y}vh`, `${(block.y - 40) % 100}vh`, `${(block.y + 20) % 100}vh`, `${block.y}vh`],
-              rotate: [0, 180, 360],
-              opacity: [0.2, 0.4, 0.2],
-            }}
-            transition={{
-              duration: block.duration,
-              delay: block.delay,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-            className="absolute"
-            style={{
-              width: `${block.size}px`,
-              height: `${block.size}px`,
-              backgroundColor: block.color,
-            }}
-          />
-        ))}
-      </div>
-
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-        animate={{ opacity: 0.6, scale: 1, rotate: 5 }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          repeatType: "reverse",
-          ease: "easeInOut",
-        }}
-        className="fixed bottom-10 right-10 pointer-events-none z-10"
-      >
-        <svg width="180" height="120" viewBox="0 0 180 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="10" y="20" width="160" height="90" rx="8" fill="#8B4513" stroke="#654321" strokeWidth="2" />
-          <rect x="20" y="30" width="140" height="50" rx="4" fill="#D2691E" />
-          <circle cx="50" cy="80" r="15" fill="#4A4A4A" />
-          <circle cx="130" cy="80" r="15" fill="#4A4A4A" />
-          <motion.circle cx="50" cy="80" r="8" fill="#654321" animate={{ rotate: 360 }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }} />
-          <motion.circle cx="130" cy="80" r="8" fill="#654321" animate={{ rotate: 360 }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }} />
-          <rect x="70" y="70" width="40" height="20" rx="2" fill="rgba(64, 224, 208, 0.3)" />
-          <circle cx="25" cy="35" r="3" fill="#40E0D0" />
-          <circle cx="155" cy="35" r="3" fill="#40E0D0" />
-          <circle cx="25" cy="95" r="3" fill="#40E0D0" />
-          <circle cx="155" cy="95" r="3" fill="#40E0D0" />
-          <line x1="30" y1="45" x2="150" y2="45" stroke="#8B4513" strokeWidth="2" />
-          <line x1="30" y1="55" x2="120" y2="55" stroke="#8B4513" strokeWidth="2" />
-        </svg>
-      </motion.div>
-    </>
+    // Fixed container, z-index -1 puts it behind EVERYTHING
+    <div className="fixed inset-0 pointer-events-none z-[-1] overflow-hidden bg-background">
+      {particles.map((p) => (
+        <motion.div
+          key={p.id}
+          initial={{ x: "-10vw", y: `${p.y}vh`, opacity: 0 }}
+          animate={{ 
+            x: "110vw",   // Move from left to right
+            opacity: [0, 0.15, 0.15, 0] // Fade in at start, fade out at end
+          }}
+          transition={{
+            duration: p.duration,
+            delay: p.delay,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+          className="absolute rounded-sm shadow-sm"
+          style={{
+            width: `${p.size}px`,
+            height: `${p.size}px`,
+            backgroundColor: p.color,
+            // Makes them look a bit more "electronic" (blurred drift)
+            filter: "blur(1px)",
+          }}
+        />
+      ))}
+      
+      {/* Optional: Add a subtle grid overlay to look like engineering paper */}
+      <div 
+        className="absolute inset-0 opacity-[0.03]" 
+        style={{ 
+          backgroundImage: `radial-gradient(#000 0.5px, transparent 0.5px)`, 
+          backgroundSize: '24px 24px' 
+        }} 
+      />
+    </div>
   );
 }

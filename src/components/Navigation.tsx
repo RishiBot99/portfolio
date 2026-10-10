@@ -6,13 +6,13 @@ export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
 
   const links = [
-    { name: "About", href: "#about" },
-    { name: "Projects", href: "#projects" },
-    { name: "Leadership", href: "#leadership" },
-    { name: "Research", href: "#research" },
-    { name: "Interests", href: "#interests" },
-    { name: "Contact", href: "#contact" },
-  ];
+  { name: "About", href: "#about" },
+  { name: "Experience", href: "#experience" }, // Changed name and href
+  { name: "Projects", href: "#projects" },
+  { name: "Leadership", href: "#leadership" },
+  { name: "Interests", href: "#interests" },
+  { name: "Contact", href: "#contact" },
+];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-amber-100/95 backdrop-blur-sm shadow-md border-b-2 border-amber-800">
